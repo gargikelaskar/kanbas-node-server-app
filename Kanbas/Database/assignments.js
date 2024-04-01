@@ -45,8 +45,28 @@ export default [
     description: "Assignment description",
     course: "FS102",
   },
-  { _id: "A203", title: "Heating Analysis", course: "FS102" },
-  { _id: "A301", title: "Structural Design Task", course: "FS103" },
-  { _id: "A302", title: "Orbital Calculations", course: "FS103" },
-  { _id: "A303", title: "Systems Engineering Exam", course: "FS103" },
+  {
+    _id: "A203",
+    title: "Heating Analysis",
+    description: "Assignment description",
+    course: "FS102",
+  },
+  {
+    _id: "A301",
+    title: "Structural Design Task",
+    description: "Assignment description",
+    course: "FS103",
+  },
+  {
+    _id: "A302",
+    title: "Orbital Calculations",
+    description: "Assignment description",
+    course: "FS103",
+  },
+  {
+    _id: "A303",
+    title: "Systems Engineering Exam",
+    description: "Assignment description",
+    course: "FS103",
+  },
 ];
