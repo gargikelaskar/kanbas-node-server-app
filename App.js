@@ -16,10 +16,20 @@ const allowedOrigins = [process.env.FRONTEND_URL, ...branches.map((branch) => `h
 console.log(allowedOrigins);
 
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/kanbas'
-mongoose.connect(CONNECTION_STRING);
+
 const app = express();
 
-
+app.use(cors({
+  credentials: true,
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+  }
+}));
 
 const sessionOptions = {
     secret: process.env.SESSION_SECRET,
@@ -35,18 +45,10 @@ if (process.env.NODE_ENV !== "development") {
     };
 }
 app.use(session(sessionOptions));
-app.use(cors({
-  credentials: true,
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-  }
-}));
+
 app.use(express.json());
+
+mongoose.connect(CONNECTION_STRING);
 UserRoutes(app);
 Hello(app);
 Lab5(app);
