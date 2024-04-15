@@ -21,16 +21,16 @@ const app = express();
 
 app.use(cors({
   credentials: true,
-  //origin: process.env.FRONTEND_URL
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      console.log(origin);
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.'+'\norigin:'+origin+'\nallowed'+allowedOrigins;
-      return callback(new Error(msg), false);
-    }
-  }
+  origin: process.env.FRONTEND_URL
+  // origin: (origin, callback) => {
+  //   if (!origin || allowedOrigins.includes(origin)) {
+  //     return callback(null, true);
+  //   } else {
+  //     console.log(origin);
+  //     const msg = 'The CORS policy for this site does not allow access from the specified Origin.'+'\norigin:'+origin+'\nallowed'+allowedOrigins;
+  //     return callback(new Error(msg), false);
+  //   }
+  // }
 }));
 
 const sessionOptions = {
