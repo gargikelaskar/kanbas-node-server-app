@@ -16,20 +16,21 @@ const allowedOrigins = [process.env.FRONTEND_URL, ...branches.map((branch) => `h
 console.log(allowedOrigins);
 
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/kanbas'
-
+console.log(CONNECTION_STRING);
 const app = express();
 
 app.use(cors({
   credentials: true,
-  origin: process.env.FRONTEND_URL
-  // origin: (origin, callback) => {
-  //   if (!origin || allowedOrigins.includes(origin)) {
-  //     return callback(null, true);
-  //   } else {
-  //     const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-  //     return callback(new Error(msg), false);
-  //   }
-  // }
+  //origin: process.env.FRONTEND_URL
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      console.log(origin);
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.'+'\norigin:'+origin+'\nallowed'+allowedOrigins;
+      return callback(new Error(msg), false);
+    }
+  }
 }));
 
 const sessionOptions = {
